@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 17:57:22 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/07 16:03:27 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/22 18:06:34 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ size_t			arg_print_lint(va_list *args, t_frmt *format)
 {
 	long int	nbr;
 
-	nbr = (long int)va_arg(*args, long int);
+	nbr = va_arg(*args, long int);
 	return (ft_frmtiput((void *)&nbr, format));
 }
 
@@ -79,8 +79,8 @@ size_t			arg_print_chr(va_list *args, t_frmt *format, int modifier)
 	if (format->format == 'c' && modifier == MDF_L)
 		format->format = 'C';
 	if (format->format == 'c')
-		c = (wint_t)(char)va_arg(*args, int);
+		c = (wchar_t)va_arg(*args, wint_t);
 	else
-		c = va_arg(*args, wint_t);
+		c = (char)va_arg(*args, int);
 	return (ft_frmtiput((void *)&c, format));
 }

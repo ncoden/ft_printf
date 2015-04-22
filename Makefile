@@ -6,47 +6,65 @@
 #    By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/25 19:58:06 by ncoden            #+#    #+#              #
-#    Updated: 2015/03/31 19:54:41 by ncoden           ###   ########.fr        #
+#    Updated: 2015/04/22 18:02:53 by ncoden           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf
-CCLIB = -Llibft -lft
-CCFLAGS = -Wall -Werror -Wextra
+NAME = libftprintf.a
+CC = gcc
+CFLAGS = 
+#CFLAGS = -Wall -Werror -Wextra
 
+LIBDIR = .
 SRCDIR = src
 OBJDIR = obj
-INCDIR =\
+INCDIR = \
 	includes\
-	libft/includes\
+	libft/includes
 
+LIB = libft/libft.a
 SRC =\
-	main.c\
 	ft_printf.c\
 	arg.c\
-	get.c\
 	print.c
 
+DEVNAME = ft_printf
+DEVMAIN = main.c
+
+LIBS = $(addprefix $(LIBDIR)/, $(LIB))
+LIBS_DIRS = $(sort $(dir $(LIBS)))
+
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
-OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
+OBJS = $(addprefix $(OBJDIR)/, $(patsubst %.c, %.o,$(SRC)))
+OBJS_DIRS = $(sort $(dir $(OBJS)))
+
+INCDIR += $(LIBS_DIRS)
 INCS = $(addprefix -I , $(INCDIR))
 
+TEMPNAME = $(addprefix $(OBJDIR)/, $(NAME))
+DEVMAIN_OBJ = $(addprefix $(OBJDIR)/, $(patsubst %.c, %.o,$(DEVMAIN)))
+
 all: $(NAME)
-$(NAME): build $(OBJS)
-	@make -C libft
-	@gcc $(CCLIB) -o $(NAME) $(OBJS)
+$(NAME): build $(LIBS) $(OBJS)
+	@ar rc $(TEMPNAME) $(OBJS)
+	@libtool -static -o $(NAME) $(TEMPNAME) $(LIBS)
+	@ranlib $(NAME)
 build:
 	@mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJS_DIRS)
 clean:
-	@make -C libft clean
+	@rm -f $(TEMPNAME)
+	@rm -f $(LIBS)
 	@rm -f $(OBJS)
 fclean: clean
-	@make -C libft fclean
 	@rm -f $(NAME)
 re: fclean all
 
-dev : all
-	@./$(NAME)
+dev: fclean build $(LIBS) $(OBJS) $(DEVMAIN_OBJ)
+	@gcc -o $(DEVNAME) $(LIBS) $(OBJS) $(DEVMAIN_OBJ) $(INCS) $(CFLAGS)
+	@./$(DEVNAME)
 
+$(LIBDIR)/%.a:
+	@make -s -C $(@D)
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@gcc -c $(CCFLAGS) $(INCS) -o $@ $<
+	@$(CC) -c -o $@ $< $(INCS) $(CFLAGS)

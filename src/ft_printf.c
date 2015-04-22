@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 10:58:38 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/05 07:57:13 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/22 18:41:29 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ inline size_t			analyse(va_list *args, const char *format)
 			len += arg_process(args, &ptr);
 			start = ptr;
 		}
-		if (*ptr != '\0')
+		else if (*ptr != '\0')
 		{
 			len++;
 			ptr++;
