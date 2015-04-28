@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 17:57:22 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/28 10:35:23 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/28 11:02:20 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t			arg_print_int(va_list *args, t_frmt *format, int modifier)
 		nbr = (size_t)va_arg(*args, long long int);
 	else
 		nbr = (int)va_arg(*args, long long int);
-	return (ft_frmtiput((void *)&nbr, format));
+	return (ft_frmtput((void *)&nbr, format));
 }
 
 size_t			arg_print_uint(va_list *args, t_frmt *format, int modifier)
@@ -51,7 +51,7 @@ size_t			arg_print_uint(va_list *args, t_frmt *format, int modifier)
 		nbr = (size_t)va_arg(*args, unsigned long long int);
 	else
 		nbr = (unsigned int)va_arg(*args, long long int);
-	return (ft_frmtiput((void *)&nbr, format));
+	return (ft_frmtput((void *)&nbr, format));
 }
 
 size_t			arg_print_lint(va_list *args, t_frmt *format)
@@ -59,7 +59,7 @@ size_t			arg_print_lint(va_list *args, t_frmt *format)
 	long int	nbr;
 
 	nbr = va_arg(*args, long int);
-	return (ft_frmtiput((void *)&nbr, format));
+	return (ft_frmtput((void *)&nbr, format));
 }
 
 size_t			arg_print_ptr(va_list *args, t_frmt *format, int modifier)
@@ -69,7 +69,7 @@ size_t			arg_print_ptr(va_list *args, t_frmt *format, int modifier)
 	if (format->format == 's' && modifier == MDF_L)
 		format->format = 'S';
 	ptr = va_arg(*args, void *);
-	return (ft_frmtiputp(ptr, format));
+	return (ft_frmtput(ptr, format));
 }
 
 size_t			arg_print_chr(va_list *args, t_frmt *format, int modifier)
@@ -82,5 +82,5 @@ size_t			arg_print_chr(va_list *args, t_frmt *format, int modifier)
 		c = (wchar_t)va_arg(*args, wint_t);
 	else
 		c = (char)va_arg(*args, int);
-	return (ft_frmtiputc((void *)&c, format));
+	return (ft_frmtput((void *)&c, format));
 }

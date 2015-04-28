@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 16:14:13 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/28 10:32:48 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/28 11:01:21 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ size_t			arg_print(va_list *args, t_frmt *format, int modifier)
 
 	c = format->format;
 	if (c == '%')
-		return (ft_frmtiputc('%', format));
+		return (ft_frmtputc('%', format));
 	else if (c == 'c' || c == 'C')
 		return (arg_print_chr(args, format, modifier));
 	else if (c == 'd' || c == 'i')
@@ -90,6 +90,6 @@ size_t			arg_print(va_list *args, t_frmt *format, int modifier)
 	else if ((ft_chrpos("psS", c)) != -1)
 		return (arg_print_ptr(args, format, modifier));
 	else
-		return (ft_frmtiputc(c, format));
+		return (ft_frmtputc(c, format));
 	return (0);
 }
