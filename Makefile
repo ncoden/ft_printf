@@ -6,14 +6,14 @@
 #    By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/25 19:58:06 by ncoden            #+#    #+#              #
-#    Updated: 2015/04/28 08:28:06 by ncoden           ###   ########.fr        #
+#    Updated: 2015/04/28 13:05:08 by ncoden           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 CC = gcc
-CFLAGS = 
-#CFLAGS = -Wall -Werror -Wextra
+#CFLAGS = 
+CFLAGS = -Wall -Werror -Wextra
 
 LIBDIR = .
 SRCDIR = src

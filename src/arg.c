@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 16:14:13 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/28 11:01:21 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/28 13:06:55 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char			*arg_parse(va_list *args, t_frmt *format, int *modifier,
 		*modifier = MDF_LL;
 	else if (ft_prsstr(&ptr, "hh"))
 		*modifier = MDF_HH;
-	else if ((*modifier = ft_chrpos("hljz", *ptr)) != -1)
+	else if ((*modifier = ft_chrpos("hljzL", *ptr)) != -1)
 		ptr++;
 	format->format = *ptr;
 	if (*ptr != '\0')

@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 10:59:54 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/28 10:23:31 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/28 13:07:12 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 
 # include <stdarg.h>
 # include <wchar.h>
-	#include <stdio.h>
 
 # include "libft.h"
 
-# define MDF_H 0
-# define MDF_L 1
-# define MDF_J 2
-# define MDF_Z 3
+# define MDF_H		(0)
+# define MDF_L		(1)
+# define MDF_J		(2)
+# define MDF_Z		(3)
 
-# define MDF_HH 10
-# define MDF_LL 11
+# define MDF_HH		(10)
+# define MDF_LL		(11)
 
 int			ft_printf(const char *format, ...);
 size_t		analyse(va_list *args, const char *format);
