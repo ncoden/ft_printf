@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 16:14:13 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/28 13:06:55 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/28 13:20:55 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char			*arg_parse(va_list *args, t_frmt *format, int *modifier,
 
 int				arg_parse_wildchar(va_list *args, int *dst, char **ptr)
 {
-	t_bool		found;
 	int			res;
 
 	if (**ptr == '*')

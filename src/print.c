@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print1.c                                           :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 17:57:22 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/28 13:04:57 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/28 13:45:20 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ size_t			arg_print_ptr(va_list *args, t_frmt *format, int modifier)
 
 	if (format->format == 's' && modifier == MDF_L)
 		format->format = 'S';
+	if (format->format == 'S'
+		&& ft_getunicode() == UNI_UNKNOW)
+		return (-1);
 	ptr = va_arg(*args, void *);
 	return (ft_frmtput(ptr, format));
 }
