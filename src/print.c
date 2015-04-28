@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 17:57:22 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/22 18:06:34 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/28 10:35:23 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ size_t			arg_print_ptr(va_list *args, t_frmt *format, int modifier)
 	if (format->format == 's' && modifier == MDF_L)
 		format->format = 'S';
 	ptr = va_arg(*args, void *);
-	return (ft_frmtiput(ptr, format));
+	return (ft_frmtiputp(ptr, format));
 }
 
 size_t			arg_print_chr(va_list *args, t_frmt *format, int modifier)
@@ -78,9 +78,9 @@ size_t			arg_print_chr(va_list *args, t_frmt *format, int modifier)
 
 	if (format->format == 'c' && modifier == MDF_L)
 		format->format = 'C';
-	if (format->format == 'c')
+	if (format->format == 'C')
 		c = (wchar_t)va_arg(*args, wint_t);
 	else
 		c = (char)va_arg(*args, int);
-	return (ft_frmtiput((void *)&c, format));
+	return (ft_frmtiputc((void *)&c, format));
 }

@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 10:59:54 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/07 16:00:47 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/28 10:23:31 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ size_t		analyse(va_list *args, const char *format);
 
 size_t		arg_process(va_list *args, char **ptr);
 
-char		*arg_parse(t_frmt *format, int *modifier, char *ptr);
+char		*arg_parse(va_list *args, t_frmt *format, int *modifier,
+				char *ptr);
+int			arg_parse_wildchar(va_list *args, int *dst, char **ptr);
 
 size_t		arg_print(va_list *args, t_frmt *format, int modifier);
 size_t		arg_print_int(va_list *args, t_frmt *format, int modifier);

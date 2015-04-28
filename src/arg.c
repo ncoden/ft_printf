@@ -6,7 +6,7 @@
 /*   By: ncoden <ncoden@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/03 16:14:13 by ncoden            #+#    #+#             */
-/*   Updated: 2015/04/22 18:33:45 by ncoden           ###   ########.fr       */
+/*   Updated: 2015/04/28 10:32:48 by ncoden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,26 @@ size_t			arg_process(va_list *args, char **ptr)
 		(*ptr)++;
 		if (**ptr != '\0')
 		{
-			*ptr = arg_parse(&format, &modifier, *ptr);
+			*ptr = arg_parse(args, &format, &modifier, *ptr);
 			return (arg_print(args, &format, modifier));
 		}
 	}
 	return (0);
 }
 
-char			*arg_parse(t_frmt *format, int *modifier, char *ptr)
+char			*arg_parse(va_list *args, t_frmt *format, int *modifier,
+					char *ptr)
 {
 	ft_frmtoptsset(format, ft_prschrs(&ptr, "#0- +"));
-	if (!(ft_prsnbr(&ptr, &(format->min_len))))
-		format->min_len = -1;
-	ft_prschr(&ptr, '.');
-	if (!(ft_prsnbr(&ptr, &(format->precision))))
+	arg_parse_wildchar(args, &(format->min_len), &ptr);
+	if (format->min_len < 0)
+	{
+		format->min_len = -(format->min_len);
+		format->opt_minus = 1;
+	}
+	if (ft_prschr(&ptr, '.'))
+		arg_parse_wildchar(args, &(format->precision), &ptr);
+	else
 		format->precision = -1;
 	if (ft_prsstr(&ptr, "ll"))
 		*modifier = MDF_LL;
@@ -43,9 +49,27 @@ char			*arg_parse(t_frmt *format, int *modifier, char *ptr)
 		*modifier = MDF_HH;
 	else if ((*modifier = ft_chrpos("hljz", *ptr)) != -1)
 		ptr++;
-	if ((format->format = ft_chrswitch("%sSpdDioOuUxXcC", *ptr)) != 0)
+	format->format = *ptr;
+	if (*ptr != '\0')
 		ptr++;
 	return (ptr);
+}
+
+int				arg_parse_wildchar(va_list *args, int *dst, char **ptr)
+{
+	t_bool		found;
+	int			res;
+
+	if (**ptr == '*')
+	{
+		*dst = va_arg(*args, int);
+		(*ptr)++;
+	}
+	else if (!(ft_prsnbr(ptr, dst)))
+		return (0);
+	if ((arg_parse_wildchar(args, &res, ptr)))
+		*dst = res;
+	return (1);
 }
 
 size_t			arg_print(va_list *args, t_frmt *format, int modifier)
