@@ -1,3 +1,5 @@
+ft_printf
+
 # Object files
 *.o
 *.ko
